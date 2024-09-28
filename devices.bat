@@ -14,7 +14,7 @@ echo Connecting to device
 @echo off
 
 @REM rem Set the IP address of your Android device
-@REM set DEVICE_IP=192.168.1.51
+@REM set DEVICE_IP=192.168.158.29
 
 @REM rem Set the port number for ADB
 @REM set ADB_PORT=5555

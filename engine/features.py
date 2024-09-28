@@ -7,6 +7,7 @@ from playsound import playsound
 import eel
 import pyautogui
 from engine.command import speak
+from engine.config import ASSISTANT_NAME
 from engine.config import *
 from engine.helper import extract_yt_term, remove_words
 from hugchat import hugchat
@@ -28,41 +29,9 @@ def playAssistantSound():
     music_dir = "www/assets/audio/start_sound.mp3"
     playsound(music_dir)
 
-def showvideo():
-    # Create a VideoCapture object and read from input file
-    cap = cv2.VideoCapture('www/assets/video/cyberbot.mp4')
-
-# Check if camera opened successfully
-    if (cap.isOpened()== False):
-        print("Error opening video file")
-
-# Read until video is completed
-    while(cap.isOpened()):
-    
-# Capture frame-by-frame
-        ret, frame = cap.read()
-        if ret == True:
-    # Display the resulting frame
-            cv2.imshow('Isimm CyberBot V3.0', frame)
-            cv2.setWindowProperty('Isimm CyberBot V3.0', cv2.WND_PROP_TOPMOST, 1)
-        
-    # Press Q on keyboard to exit
-            if cv2.waitKey(20) & 0xFF == ord('q'):
-                cap.release()
-                cv2.destroyWindow('Isimm CyberBot V3.0')
-                break
-
-# Break the loop
-        else:
-            break
-    cap.release() 
-    cv2.destroyWindow('Isimm CyberBot V3.0')  
-
-# When everything done, release
-# the video capture object
-    
+#################################
 def showimages():
-    img1=cv2.imread('www/assets/img/1.jpg')
+    img1=cv2.imread('www/assets/img/img6.jpg')
     img2=cv2.imread('www/assets/img/2.jpg')
     img3=cv2.imread('www/assets/img/3.jpg')
     img4=cv2.imread('www/assets/img/4.jpg')
@@ -71,13 +40,13 @@ def showimages():
     img7=cv2.imread('www/assets/img/7.jpg')
     img8=cv2.imread('www/assets/img/8.jpg')
     img9=cv2.imread('www/assets/img/9.jpg')
-    img10=cv2.imread('www/assets/img/10.jpg')
+    img10=cv2.imread('www/assets/img/integ2.jpg')
     img11=cv2.imread('www/assets/img/11.jpg')
-    img12=cv2.imread('www/assets/img/12.jpg')
-    img13=cv2.imread('www/assets/img/13.jpg')
+    img12=cv2.imread('www/assets/img/img14.jpg')
+    img13=cv2.imread('www/assets/img/12.jpg')
     img14=cv2.imread('www/assets/img/14.jpg')
     (h, w) = img1.shape[:2]
-    new_width2 = 500
+    new_width2 = 700
     aspect_ratio = h / w
     new_height2 = int(new_width2 * aspect_ratio)
 
@@ -93,68 +62,65 @@ def showimages():
     resized_image9 = cv2.resize(img9, (new_width2, new_height2))
     resized_image10 = cv2.resize(img10, (new_width2, new_height2))
     resized_image11 = cv2.resize(img11, (new_width2, new_height2))
-    resized_image12= cv2.resize(img12, (500, 400))
+    resized_image12= cv2.resize(img12, (400, 500))
     resized_image13= cv2.resize(img13, (new_width2, new_height2))
     resized_image14= cv2.resize(img14, (new_width2, new_height2))
-    speak("CPU is a Robotics Club at ISIMM Created in 2018, it focuses on enhancing students' skills in robotics and development. Through hands-on activities, members gain valuable experience in teamwork and collaboration, while also building new friendships. The club regularly organizes competitions,it also providing students with opportunities to showcase their talents and put their skills to the test throught projects")
-    speak("The journey start with the integration day which will be followed with building team day ")
+
+    speak("CPU Club at ISIMM was established in 2018 with a clear mission: to enhance students skills in development, problem-solving, and robotics. Through regular competitions and engaging projects, the club provides students with valuable opportunities to showcase their talents and put their skills to the test")
+    
+    speak("You can see various innovative projects created by Club CPU seniors during Integration Day")
     cv2.imshow('integration day',resized_image5)
     cv2.setWindowProperty("integration day", cv2.WND_PROP_TOPMOST, 1)
-    cv2.waitKey(delay=3000)
-    cv2.imshow('Team building day',resized_image6)
-    cv2.setWindowProperty('Team building day', cv2.WND_PROP_TOPMOST, 1)
-    cv2.waitKey(delay=3000)
+    cv2.waitKey(delay=2000)
+    cv2.destroyWindow('integration day')
+
     cv2.imshow('Team building day2',resized_image1)
     cv2.setWindowProperty('Team building day2', cv2.WND_PROP_TOPMOST, 1)
-    cv2.waitKey(delay=3000)
+    cv2.waitKey(delay=2000)
     cv2.destroyWindow('Team building day2')
-    cv2.destroyWindow('Team building day')
-    cv2.destroyWindow('integration day')
-    speak("I will add that the CPU activitis contains worckshops in the developpment and robotic domains  ")
-    cv2.imshow('soft step day',resized_image2)
-    cv2.setWindowProperty('soft step day', cv2.WND_PROP_TOPMOST, 1)
-    cv2.waitKey(delay=3000)
-    cv2.imshow('worckshop day',resized_image4)
-    cv2.setWindowProperty('worckshop day', cv2.WND_PROP_TOPMOST, 1)
-    cv2.waitKey(delay=3000)
-    cv2.imshow('worckshop1',resized_image7)
-    cv2.setWindowProperty('worckshop1', cv2.WND_PROP_TOPMOST, 1)
-    cv2.waitKey(delay=3000)
-    speak("so far it is a chaine of training sessions and worckshops to develop the student skill ")
-    cv2.imshow('worckshop2',resized_image8)
-    cv2.setWindowProperty('worckshop2', cv2.WND_PROP_TOPMOST, 1)
-    cv2.waitKey(delay=3000)
-    cv2.imshow('worckshop3',resized_image9)
-    cv2.setWindowProperty('worckshop3', cv2.WND_PROP_TOPMOST, 1)
-    cv2.waitKey(delay=3000)
-    speak("i will say that we have a professional stuff for this kind of jobs ,they have the talent to give an efficient performance and hight level knowledge ")
-    cv2.imshow('worckshop4',resized_image10)
-    cv2.setWindowProperty('worckshop4', cv2.WND_PROP_TOPMOST, 1)
-    cv2.waitKey(delay=3000)
-    cv2.imshow('worckshop5',resized_image11)
-    cv2.setWindowProperty('worckshop5', cv2.WND_PROP_TOPMOST, 1)
-    cv2.waitKey(delay=3000)
-    cv2.destroyWindow('worckshop5')
-    cv2.destroyWindow('worckshop4')
-    cv2.destroyWindow('worckshop3')
-    cv2.destroyWindow('worckshop2')
-    cv2.destroyWindow('worckshop1')
-    cv2.destroyWindow('worckshop day')
-    cv2.destroyWindow('soft step day')
-    cv2.imshow('cpu',resized_image12)
-    cv2.setWindowProperty('cpu', cv2.WND_PROP_TOPMOST, 1)
-    cv2.waitKey(delay=3000)
-    speak("as we see here our dev team had participated at the TCPC Competitiont , it's an honor to see young talented students grwing up and moving forward")
+    
+    speak("They have a professional and talented staff working on improving the level of student knowledge in development through programming languages")
+
+    cv2.imshow('Workshop1',resized_image7)
+    cv2.setWindowProperty('Workshop1', cv2.WND_PROP_TOPMOST, 1)
+    cv2.waitKey(delay=2000)
+    cv2.destroyWindow('Workshop1')
+
+
+    cv2.imshow('workshop2',resized_image8)
+    cv2.setWindowProperty('workshop2', cv2.WND_PROP_TOPMOST, 1)
+    cv2.waitKey(delay=2000)
+    cv2.destroyWindow('workshop2')
+
+    cv2.imshow('Workshop3',resized_image9)
+    cv2.setWindowProperty('Workshop3', cv2.WND_PROP_TOPMOST, 1)
+    cv2.waitKey(delay=2000)
+    cv2.destroyWindow('Workshop3')
+
+    speak("These coding rockstars aren't just crushing it at TCPC and mind-bending problem-solving showdowns - they're cooking up epic workshops to turn fellow students into puzzle-busting prodigies!")
     cv2.imshow('big pics',resized_image13)
     cv2.setWindowProperty('big pics', cv2.WND_PROP_TOPMOST, 1)
-    cv2.waitKey(delay=3000)
-    speak("however i will never forget the robotic competitions which is a place for competetive minds ")
-    cv2.imshow('festival',resized_image14)
-    cv2.setWindowProperty('festival', cv2.WND_PROP_TOPMOST, 1)
-    cv2.waitKey(delay=3000)
-    cv2.destroyWindow('festival')
+    cv2.waitKey(delay=2000)
     cv2.destroyWindow('big pics')
+
+    
+    speak("Not just coding wizards, these CPU Club seniors are also robotics gurus, transforming newbies into tech maestros through hands-on, mind-blowing projects!")
+    cv2.imshow('Workshop4',resized_image10)
+    cv2.setWindowProperty('Workshop4', cv2.WND_PROP_TOPMOST, 1)
+    cv2.waitKey(delay=2000)
+    cv2.destroyWindow('Workshop4')
+
+    cv2.imshow('Workshop5',resized_image11)
+    cv2.setWindowProperty('Workshop5', cv2.WND_PROP_TOPMOST, 1)
+    cv2.waitKey(delay=2000)
+    cv2.destroyWindow('Workshop5')
+
+    cv2.imshow('cpu',resized_image12)
+    cv2.setWindowProperty('cpu', cv2.WND_PROP_TOPMOST, 1)
+    cv2.waitKey(delay=2000)
     cv2.destroyWindow('cpu')
+
+##############################################
     
 def openCommand(query):
     query=query.replace(ASSISTANT_NAME,"")    
@@ -188,7 +154,7 @@ def openCommand(query):
                     try:
                         os.system('start '+query)
                     except:
-                        speak("can t open")
+                        speak("can't open")
         except:
             speak("some thing went wrong")
 
@@ -210,7 +176,7 @@ def hotword():
     try:
        
         # pre trained keywords    
-        porcupine=pvporcupine.create(keywords=["americano","computer"]) 
+        porcupine=pvporcupine.create(keywords=[ASSISTANT_NAME,"americano","computer"]) 
         paud=pyaudio.PyAudio()
         audio_stream=paud.open(rate=porcupine.sample_rate,channels=1,format=pyaudio.paInt16,input=True,frames_per_buffer=porcupine.frame_length)
         
@@ -232,6 +198,8 @@ def hotword():
                 autogui.press("j")
                 time.sleep(2)
                 autogui.keyUp("win")
+
+                
                 
     except:
         if porcupine is not None:
@@ -272,12 +240,12 @@ def whatsApp(mobile_no, message, flag, name):
     elif flag == 'call':
         target_tab = 7
         message = ''
-        jarvis_message = "calling to "+name
+        jarvis_message = "calling "+name
 
     else:
         target_tab = 6
         message = ''
-        jarvis_message = "staring video call with "+name
+        jarvis_message = "starting video call with "+name
 
     # Encode the message for URL
     encoded_message = quote(message)
@@ -304,8 +272,8 @@ def whatsApp(mobile_no, message, flag, name):
 
 # chat bot 
 def chatBot(query):
-    speak("It's my pleasure to "+ query)
-    query = query + "in three lines"
+
+    query = query + "in three lines without saying in three lines "
     user_input = query.lower()
     chatbot = hugchat.ChatBot(cookie_path="engine/cookies.json")
     id = chatbot.new_conversation()
@@ -314,6 +282,10 @@ def chatBot(query):
     print(response)
     speak(response)
     return response
+    
+    # HugChat is an unofficial Python client for HuggingFace's chat API.
+    # HugChat: This is a Python library that allows you to interact with HuggingFace's
+    # conversational AI models through their chat interface
 
 # android automation
 
@@ -348,3 +320,11 @@ def sendMessage(message, mobileNo, name):
     #send
     tapEvents(644, 996)
     speak("message send successfully to "+name)
+
+
+
+
+
+
+
+      

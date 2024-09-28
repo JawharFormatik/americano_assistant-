@@ -1,1 +1,1 @@
-ASSISTANT_NAME="alexa"
+ASSISTANT_NAME="Americano"

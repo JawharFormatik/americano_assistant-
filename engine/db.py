@@ -8,14 +8,14 @@ cursor = conn.cursor()
 # query = "CREATE TABLE IF NOT EXISTS sys_command(id integer primary key, name VARCHAR(100), path VARCHAR(1000))"
 # cursor.execute(query)
 
-# query = "INSERT INTO sys_command VALUES (null,'brave', 'C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave')"
+# query = "INSERT INTO sys_command VALUES (null,'google', 'C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Google Chrome.lnk')"
 # cursor.execute(query)
 # conn.commit()
 
 # query = "CREATE TABLE IF NOT EXISTS web_command(id integer primary key, name VARCHAR(100), url VARCHAR(1000))"
 # cursor.execute(query)
 
-# query = "INSERT INTO web_command VALUES (null,'chat gpt', 'https://chatgpt.com/')"
+# query = "INSERT INTO web_command VALUES (null,'facebook', 'https://www.facebook.com/')"
 # cursor.execute(query)
 # conn.commit()
 
@@ -39,11 +39,11 @@ cursor = conn.cursor()
 # conn.close()
 
 
-query = "INSERT INTO contacts VALUES (null,'mouhib', '+21623038002',null)"
-cursor.execute(query)
-conn.commit()
+#query = "INSERT INTO contacts VALUES (null,'cpu president', '+21625477295',null)"
+#cursor.execute(query)
+#conn.commit()
 
-# query = "DELETE FROM sys_command where id=2"
+# query = "DELETE FROM sys_command where id=6"
 # cursor.execute(query)
 # conn.commit()
 

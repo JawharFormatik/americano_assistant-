@@ -1,9 +1,11 @@
+import os
 import eel
+
 from engine.features import *
 from engine.command import *
-
-from engine.command import *
 from engine.auth import recoganize
+
+
 def start():
     
     eel.init("www")
@@ -19,7 +21,7 @@ def start():
             eel.hideFaceAuth()
             speak("Face Authentication Successful")
             eel.hideFaceAuthSuccess()
-            speak("Hello, Welcome Sir, How can i Help You")
+            speak("Hello , Welcome Sir, How can i Help You ?")
             eel.hideStart()
             playAssistantSound()
         else:
@@ -27,3 +29,4 @@ def start():
     os.system('start chrome.exe --app="http://localhost:8000/index.html"')
 
     eel.start('index.html', mode=None, host='localhost', block=True)
+

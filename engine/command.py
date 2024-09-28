@@ -2,19 +2,37 @@ import pyttsx3 #pick the voice
 import speech_recognition as sr
 import eel
 import time
+import threading
+from engine.funct import showvideo
+
+
+speak_thread = None
 
 @eel.expose
 def speak(text):
-  text = str(text)
-  engine = pyttsx3.init()
-  voices = engine.getProperty('voices')
-  engine.setProperty('voice', voices[1].id)   #changing index, changes voices. 1 for female 2 For male
-  engine.setProperty('rate', 174)     # setting up new voice rate(voice speed)
-  eel.DisplayMessage(text)
-  eel.DisplayMessage(text)
-  engine.say(text)
-  eel.recieverText(text)
-  engine.runAndWait()
+    global engine
+    global speak_thread
+    text = str(text)
+    engine = pyttsx3.init()   
+    voices = engine.getProperty('voices')
+    engine.setProperty('voice', voices[1].id)  # Changing index, changes voices. 1 for female, 2 for male
+    engine.setProperty('rate', 174)  # Setting up new voice speed (174 words per minute)    
+    eel.DisplayMessage(text)
+    eel.DisplayMessage(text)
+    engine.say(text)
+    # Start the speech in a separate thread
+    # speak_thread = threading.Thread(target=engine.say, args=(text))
+    # speak_thread.start()
+    eel.recieverText(text)
+    engine.runAndWait()
+
+# @eel.expose
+# def stop_speaking():
+#     if speak_thread:
+#         speak_thread.terminate()
+#         print("Speech stopped")
+#     else:
+#         print("Not currently speaking")
 
 @eel.expose
 def takeCommand():
@@ -55,19 +73,52 @@ def allCommands(message=1):
   else:
      query=message
      eel.senderText(query)
-     
+  
+  Q1=['join','which','recommend', 'best club']
+  Q2=['about you','introduce yourself','is your name','your creators','created you']
+  Q3=['committee' , 'comity']
   try:
 
-    if "open" in query:
+    if "don't" in query in query:
+      speak("I apologize, how can I help you?")
+
+    elif "cpu club" in query:
+      from engine.features import showimages
+      showimages()
+
+    elif any(word in query for word in Q1 ):
+      speak("All clubs can provide you with additional information to enhance your knowledge, but Club CPU can help you develop skills in various fields like problem-solving, development, and robotics. Therefore, it might be the best choice for you")
+
+    elif any(word in query for word in Q2 ):
+      speak("I'm Americano, an AI assistant created by senior members of CPU club. I can understand and reply to natural language, and I can also handle various tasks to help facilitate your life")
+
+    elif any(word in query for word in Q3):
+      speak("I'm gonna present all senior members of CPU club the president koussay attaya and his Vise Yosra ghanmi , SG Oumayma Badis , The RF are Aziz Harzallah and Mazen Tora , The RT Aya hosni , The RH  Mouna Dhaouad , The Treadurer  Skander sghaier , committee chef off-road  Jawher ben sousia , committee chef Fighter Mouhib ghanmi , committee chef junior Khadija elloumi , committee chef Autonome Najah zroud  , committee chef Logistics Fatma salama , committee chef media Tasnim Zroud , committee chef External matter Ranim radhouani , committee chef Design Ahmed mecrchaoui , committee chef sponsoring Yassine mthioueb")
+
+    elif "open" in query:
       from engine.features import openCommand
       openCommand(query)
-    elif "club cpu" in query:
-       from engine.features import showimages
-       showimages()
+
+###################################
+
     elif "cyberbot" in query: 
-       speak("Isimm Cyberbot is a competition organized by CPU Isimm where competetors will have 4 challenges where they will chose one of them to play and win a prize , the first challenge which is autonomus , this autonomous challenge requires autonomous robots as the word says it is a robot based on sensors that hepls him to follow a line and avoid obsticals , the second challenge is junior it is a challenge oriented to children aged under 18 where they have a 4 wheel robot controlled with a remote controle device and the goal is to reach the finish line , as far as we go we have at the third place the master peace which is the challenge All terrain , it is the same as junior with older competetors and bigger map , running to the final challenge named as fighter , this challenge is a showcase of the power of destroying machines , two robots will be placed in a closed and secure ring to fight and destroy each other , for more explaination i will show you the last year video to know more about isimm cyberbot ")     
-       from engine.features import showvideo
-       showvideo()  
+      def speak_thread():
+          speak("Isimm Cyberbot is a competition organized by CPU ISIMM club where competitors will have 4 challenges where they will choose one of them to play and win a prize. The first challenge, which is autonomous, requires autonomous robots that use sensors to follow a line and avoid obstacles. The second challenge is junior, oriented to children aged under 18, where they have a 4-wheel robot controlled with a remote control device, and the goal is to reach the finish line. The third challenge is the masterpiece, which is the All-terrain challenge, similar to junior but with older competitors and a bigger map. The final challenge is named fighter, where two robots are placed in a closed and secure ring to fight and destroy each other.")
+
+      def video_thread():
+          showvideo()
+
+      # Create two threads
+      speak_thread = threading.Thread(target=speak_thread)
+      video_thread = threading.Thread(target=video_thread)
+
+      # Start both threads
+      speak_thread.start()
+      video_thread.start()
+
+      # Wait for both threads to complete
+      speak_thread.join()
+      video_thread.join()
       
     elif "on youtube" in query:
       from engine.features import playYoutube
@@ -103,25 +154,15 @@ def allCommands(message=1):
                         message = 'video call'
                                         
                     whatsApp(contact_no, query, message, name)
-                
-
+              
                        
     else:
       from engine.features import chatBot
       chatBot(query)
-      
-
-        
 
   except Exception as error:
     # handle the exception
     print("An Error occurred:", error)
 
   eel.ShowHood()
-
-
-
-
-
-
 

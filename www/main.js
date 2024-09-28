@@ -59,6 +59,18 @@ $(document).ready(function () {
   }
   document.addEventListener('keyup', doc_keyUp, false);
 
+
+//   document.addEventListener('keyup', function(e) {
+//     if (e.key === 'j' && e.metaKey) {
+      
+//       eel.playAssistantSound()
+//       $("#Oval").attr("hidden", false);
+//       $("#SiriWave").attr("hidden", true);
+//       eel.stop_speaking()
+//       console.log("Stopping speech");
+//     }
+// });
+
   function PlayAssistant(message){
     if (message!="") {
       $("#Oval").attr("hidden", true);
@@ -69,13 +81,12 @@ $(document).ready(function () {
 
   }
   $("#chatbox").keypress((e) => {
-    key=e.which;
+    key = e.which;
     if (key==13) {
       let message=$("#chatbox").val();
-    PlayAssistant(message)
+      PlayAssistant(message)
     }
   }
   );
- 
-});
 
+})

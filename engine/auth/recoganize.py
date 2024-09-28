@@ -3,7 +3,6 @@ import time
 import cv2
 import pyautogui as p
 
-
 def AuthenticateFace():
 
     flag = ""
@@ -17,12 +16,9 @@ def AuthenticateFace():
 
     font = cv2.FONT_HERSHEY_SIMPLEX  # denotes the font type
 
-
     id = 2  # number of persons you want to Recognize
 
-
-    names = ['', 'djo']  # names, leave first empty bcz counter starts from 0
-
+    names = ['', 'oumayma']  # names, leave first empty bcz counter starts from 0
 
     cam = cv2.VideoCapture(0, cv2.CAP_DSHOW)  # cv2.CAP_DSHOW to remove warning
     cam.set(3, 640)  # set video FrameWidht
@@ -57,7 +53,7 @@ def AuthenticateFace():
             id, accuracy = recognizer.predict(converted_image[y:y+h, x:x+w])
 
             # Check if accuracy is less them 100 ==> "0" is perfect match
-            if (accuracy < 100):
+            if (accuracy < 70):
                 id = names[id]
                 accuracy = "  {0}%".format(round(100 - accuracy))
                 flag = 1
@@ -77,10 +73,100 @@ def AuthenticateFace():
             break
         if flag == 1:
             break
-            
 
     # Do a bit of cleanup
-    
+
     cam.release()
     cv2.destroyAllWindows()
+    print(flag)
     return flag
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# from sys import flags
+# import time
+# import cv2
+# import pyautogui as p
+
+
+# def AuthenticateFace():
+#     recognizer = cv2.face.LBPHFaceRecognizer_create()
+#     recognizer.read('engine\\auth\\trainer\\trainer.yml')
+#     cascadePath = "engine\\auth\\haarcascade_frontalface_default.xml"
+#     faceCascade = cv2.CascadeClassifier(cascadePath)
+
+#     font = cv2.FONT_HERSHEY_SIMPLEX
+
+#     names = ['', 'oumayma'] 
+
+#     cam = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+#     cam.set(3, 640)
+#     cam.set(4, 480)
+
+#     minW = 0.1*cam.get(3)
+#     minH = 0.1*cam.get(4)
+
+#     while True:
+#         ret, img = cam.read()
+#         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+#         faces = faceCascade.detectMultiScale(
+#             gray,
+#             scaleFactor=1.2,
+#             minNeighbors=5,
+#             minSize=(int(minW), int(minH)),
+#         )
+
+#         for(x, y, w, h) in faces:
+#             cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 2)
+#             id, confidence = recognizer.predict(gray[y:y+h, x:x+w])
+
+#             if (confidence < 100):  # Adjust this threshold as needed
+#                 id = names[id]
+#                 confidence = f"{round(100 - confidence)}%"
+#                 return True  # Authentication successful
+#             else:
+#                 id = "unknown"
+#                 confidence = f"{round(100 - confidence)}%"
+
+#             cv2.putText(img, str(id), (x+5, y-5), font, 1, (255, 255, 255), 2)
+#             cv2.putText(img, str(confidence), (x+5, y+h-5), font, 1, (255, 255, 0), 1)
+
+#         cv2.imshow('camera', img)
+
+#         k = cv2.waitKey(10) & 0xff
+#         if k == 27:
+#             break
+
+#     cam.release()
+#     cv2.destroyAllWindows()
+#     return False  # Authentication failed
+
+# # result = AuthenticateFace()
+# # print("Authentication result:", result)
